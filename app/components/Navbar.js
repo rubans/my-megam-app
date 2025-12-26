@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -6,7 +7,14 @@ export default function Navbar() {
         <nav className={styles.navbar}>
             <div className={`container ${styles.navContainer}`}>
                 <Link href="/" className={styles.logo}>
-                    My Megam
+                    <Image
+                        src="/icon.png"
+                        alt="My Megam Logo"
+                        width={60}
+                        height={60}
+                        className={styles.logoImage}
+                    />
+                    <span>My Megam</span>
                 </Link>
 
                 <div className={styles.links}>
