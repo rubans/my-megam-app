@@ -1,0 +1,71 @@
+.section {
+    padding: 8rem 0;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5rem;
+    letter-spacing: -0.02em;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    .steps {
+        flex-direction: row;
+        gap: 2rem;
+    }
+}
+
+.step {
+    flex: 1;
+    position: relative;
+}
+
+.stepNumber {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--border);
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.stepTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
+}
+
+.stepDescription {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Connecting line design */
+.steps::before {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--border);
+    z-index: -1;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .steps::before {
+        display: block;
+    }
+}

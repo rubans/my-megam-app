@@ -1,0 +1,96 @@
+.section {
+    padding: var(--spacing-section) 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+}
+
+.content {
+    align-self: center;
+}
+
+.label {
+    color: #a78bfa;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.description {
+    color: var(--secondary-text);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+}
+
+.stats {
+    display: flex;
+    gap: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statValue {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+}
+
+.statLabel {
+    color: var(--secondary-text);
+    font-size: 0.875rem;
+}
+
+.process {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+}
+
+.processTitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.step {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.stepNum {
+    font-family: monospace;
+    color: #a78bfa;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.stepContent h4 {
+    margin-bottom: 0.25rem;
+}
+
+.stepContent p {
+    color: var(--secondary-text);
+    font-size: 0.95rem;
+}
+
+@media (min-width: 992px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
