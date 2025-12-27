@@ -1,5 +1,6 @@
 import { Inter, Pixelify_Sans } from "next/font/google";
 import { GoogleAnalytics } from '@next/third-parties/google';
+import { ToastProvider } from './context/ToastContext';
 import "./globals.css";
 
 const inter = Inter({
@@ -21,7 +22,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${pixelify.variable}`} suppressHydrationWarning>
-        {children}
+        <ToastProvider>
+          {children}
+        </ToastProvider>
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
       </body>
     </html>
