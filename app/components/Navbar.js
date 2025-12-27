@@ -1,32 +1,52 @@
+'use client';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Navbar.module.css';
+import ContactModal from './ContactModal';
 
 export default function Navbar() {
+    const [isContactOpen, setIsContactOpen] = useState(false);
+
     return (
-        <nav className={styles.navbar}>
-            <div className={`container ${styles.navContainer}`}>
-                <Link href="/" className={styles.logo}>
-                    <Image
-                        src="/icon.png"
-                        alt="My Megam Logo"
-                        width={60}
-                        height={60}
-                        className={styles.logoImage}
-                    />
-                    <span>My Megam</span>
-                </Link>
+        <>
+            <nav className={styles.navbar}>
+                <div className={`container ${styles.navContainer}`}>
+                    <Link href="/" className={styles.logo}>
+                        <Image
+                            src="/icon.png"
+                            alt="My Megam Logo"
+                            width={60}
+                            height={60}
+                            className={styles.logoImage}
+                        />
+                        <span>My Megam</span>
+                    </Link>
 
-                <div className={styles.links}>
-                    <Link href="#services" className={styles.link}>Services</Link>
-                    <Link href="#about" className={styles.link}>About</Link>
-                    <Link href="#contact" className={styles.link}>Contact</Link>
+                    <div className={styles.links}>
+                        <Link href="#services" className={styles.link}>Services</Link>
+                        <Link href="#about" className={styles.link}>About</Link>
+                        <button
+                            onClick={() => setIsContactOpen(true)}
+                            className={`${styles.link} ${styles.navButton}`}
+                        >
+                            Contact
+                        </button>
+                    </div>
+
+                    <button
+                        onClick={() => setIsContactOpen(true)}
+                        className="btn-primary"
+                    >
+                        Get Started
+                    </button>
                 </div>
-
-                <Link href="#contact" className="btn-primary">
-                    Get Started
-                </Link>
-            </div>
-        </nav>
+            </nav>
+            <ContactModal
+                isOpen={isContactOpen}
+                onClose={() => setIsContactOpen(false)}
+            />
+        </>
     );
 }
