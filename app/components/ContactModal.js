@@ -37,14 +37,17 @@ export default function ContactModal({ isOpen, onClose }) {
             });
 
             if (response.ok) {
+                if (window.gtag) window.gtag('event', 'form_submission', { value: 'success' });
                 alert('Inquiry sent successfully! We will get back to you soon.');
                 onClose();
             } else {
                 const errorData = await response.json();
+                if (window.gtag) window.gtag('event', 'form_submission', { value: 'error', error: errorData.error });
                 alert(`Error: ${errorData.error || 'Failed to send message.'}`);
             }
         } catch (error) {
             console.error('Submission error:', error);
+            if (window.gtag) window.gtag('event', 'form_submission', { value: 'exception' });
             alert('Something went wrong. Please try again later.');
         }
     };

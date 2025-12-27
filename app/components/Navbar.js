@@ -25,10 +25,29 @@ export default function Navbar() {
                     </Link>
 
                     <div className={styles.links}>
-                        <Link href="#services" className={styles.link}>Services</Link>
-                        <Link href="#about" className={styles.link}>About</Link>
+                        <Link
+                            href="#services"
+                            className={styles.link}
+                            onClick={() => {
+                                if (window.gtag) window.gtag('event', 'nav_click', { value: 'services' });
+                            }}
+                        >
+                            Services
+                        </Link>
+                        <Link
+                            href="#about"
+                            className={styles.link}
+                            onClick={() => {
+                                if (window.gtag) window.gtag('event', 'nav_click', { value: 'about' });
+                            }}
+                        >
+                            About
+                        </Link>
                         <button
-                            onClick={() => setIsContactOpen(true)}
+                            onClick={() => {
+                                setIsContactOpen(true);
+                                if (window.gtag) window.gtag('event', 'button_click', { value: 'contact_nav' });
+                            }}
                             className={`${styles.link} ${styles.navButton}`}
                         >
                             Contact
@@ -36,7 +55,10 @@ export default function Navbar() {
                     </div>
 
                     <button
-                        onClick={() => setIsContactOpen(true)}
+                        onClick={() => {
+                            setIsContactOpen(true);
+                            if (window.gtag) window.gtag('event', 'button_click', { value: 'get_started_nav' });
+                        }}
                         className="btn-primary"
                     >
                         Get Started
