@@ -1,12 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useToast } from '../context/ToastContext';
 import styles from './ContactModal.module.css';
 
 export default function ContactModal({ isOpen, onClose }) {
-    const { showToast } = useToast();
-
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -41,17 +38,17 @@ export default function ContactModal({ isOpen, onClose }) {
 
             if (response.ok) {
                 if (window.gtag) window.gtag('event', 'form_submission', { value: 'success' });
-                showToast('Inquiry sent successfully! We will get back to you soon.', 'success');
+                alert('Inquiry sent successfully! We will get back to you soon.');
                 onClose();
             } else {
                 const errorData = await response.json();
                 if (window.gtag) window.gtag('event', 'form_submission', { value: 'error', error: errorData.error });
-                showToast(errorData.error || 'Failed to send message.', 'error');
+                alert(`Error: ${errorData.error || 'Failed to send message.'}`);
             }
         } catch (error) {
             console.error('Submission error:', error);
             if (window.gtag) window.gtag('event', 'form_submission', { value: 'exception' });
-            showToast('Something went wrong. Please try again later.', 'error');
+            alert('Something went wrong. Please try again later.');
         }
     };
 

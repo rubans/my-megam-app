@@ -8,7 +8,8 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   SERVICE_NAME: mymegam
-  REGION: europe-west2
+  REGION: us-central1
+
 permissions:
   contents: read
   id-token: write
