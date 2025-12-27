@@ -37,7 +37,9 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
+          docker build \
+            --build-arg NEXT_PUBLIC_GA_MEASUREMENT_ID="${{ secrets.NEXT_PUBLIC_GA_MEASUREMENT_ID }}" \
+            -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
 
       - name: Deploy to Cloud Run
@@ -48,6 +50,10 @@ jobs:
           region: ${{ env.REGION }}
           image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           flags: '--allow-unauthenticated'
+          env_vars: |-
+            GMAIL_CLIENT_ID=${{ secrets.GMAIL_CLIENT_ID }}
+            GMAIL_CLIENT_SECRET=${{ secrets.GMAIL_CLIENT_SECRET }}
+            GMAIL_REFRESH_TOKEN=${{ secrets.GMAIL_REFRESH_TOKEN }}
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
