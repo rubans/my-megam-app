@@ -17,6 +17,38 @@ export default function ContactModal({ isOpen, onClose }) {
 
     if (!isOpen) return null;
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            interest: formData.get('interest'),
+            message: formData.get('message'),
+        };
+
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                alert('Inquiry sent successfully! We will get back to you soon.');
+                onClose();
+            } else {
+                const errorData = await response.json();
+                alert(`Error: ${errorData.error || 'Failed to send message.'}`);
+            }
+        } catch (error) {
+            console.error('Submission error:', error);
+            alert('Something went wrong. Please try again later.');
+        }
+    };
+
     return (
         <div className={styles.overlay} onClick={onClose}>
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -30,20 +62,20 @@ export default function ContactModal({ isOpen, onClose }) {
                 <h2 className={styles.title}>Get in Touch</h2>
                 <p className={styles.subtitle}>Let's discuss how we can help you innovate with AI.</p>
 
-                <form className={styles.form} onSubmit={(e) => { e.preventDefault(); alert('Request sent! (Testing)'); onClose(); }}>
+                <form className={styles.form} onSubmit={handleSubmit}>
                     <div className={styles.group}>
                         <label className={styles.label}>Full Name</label>
-                        <input type="text" className={styles.input} placeholder="John Doe" required />
+                        <input name="name" type="text" className={styles.input} placeholder="John Doe" required />
                     </div>
 
                     <div className={styles.group}>
                         <label className={styles.label}>Email Address</label>
-                        <input type="email" className={styles.input} placeholder="john@example.com" required />
+                        <input name="email" type="email" className={styles.input} placeholder="john@example.com" required />
                     </div>
 
                     <div className={styles.group}>
                         <label className={styles.label}>I'm interested in...</label>
-                        <select className={styles.select} required defaultValue="">
+                        <select name="interest" className={styles.select} required defaultValue="">
                             <option value="" disabled>Select an option</option>
                             <option value="ai-solutions">AI Solutions</option>
                             <option value="workflow-automation">Workflow Automation</option>
@@ -54,7 +86,7 @@ export default function ContactModal({ isOpen, onClose }) {
 
                     <div className={styles.group}>
                         <label className={styles.label}>Message</label>
-                        <textarea className={styles.textarea} placeholder="How can we help?" required></textarea>
+                        <textarea name="message" className={styles.textarea} placeholder="How can we help?" required></textarea>
                     </div>
 
                     <button type="submit" className={`btn-primary ${styles.submitBtn}`}>
