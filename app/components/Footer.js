@@ -33,9 +33,8 @@ export default function Footer() {
                     <div className={styles.col}>
                         <h4 className={styles.heading}>Contact</h4>
                         <ul className={styles.links}>
-                            <li>hello@mymegam.com</li>
-                            <li>+1 (555) 123-4567</li>
-                            <li>123 AI Boulevard, Tech City</li>
+                            <li><a href="mailto:support@mymegam.com">support@mymegam.com</a></li>
+                            <li>Fleet, Hampshire</li>
                         </ul>
                     </div>
                 </div>
